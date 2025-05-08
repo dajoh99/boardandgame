@@ -12,6 +12,22 @@
 body {
   position: relative;
   font-family: Arial, sans-serif;
+  background-color: #f8f9fa; /* Light gray background for contrast */
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('images/monopolyman2.png'); /* Path to your image */
+  background-repeat: no-repeat; /* Prevent tiling */
+  background-position: center; /* Center the image */
+  background-size: contain; /* Scale the image to fit */
+  opacity: 0.05; /* Adjust transparency (lower value = more transparent) */
+  z-index: -1; /* Place behind all content */
 }
 
 .nav-bar {

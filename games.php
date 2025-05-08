@@ -71,7 +71,7 @@ if (!isset($_SESSION['cart'])) {
                             <h5 class="card-title"><?php echo htmlspecialchars($game['name']); ?></h5>
                             <p class="card-text"><?php echo htmlspecialchars($game['description']); ?></p>
                             <button class="btn btn-primary"
-                                onclick="showDetails('<?php echo htmlspecialchars($game['name']); ?>', '<?php echo htmlspecialchars($game['description']); ?>', '<?php echo htmlspecialchars($game['additional_description']); ?>')">
+                                onclick="showDetails('<?php echo htmlspecialchars($game['name']); ?>', '<?php echo htmlspecialchars($game['description']); ?>', '<?php echo htmlspecialchars($game['additional_description']); ?>', '<?php echo htmlspecialchars($game['image_path']); ?>')">
                                 View Details
                             </button>
                         </div>
@@ -82,15 +82,15 @@ if (!isset($_SESSION['cart'])) {
     </div>
 
     <!-- Modal for Game Details -->
-    <div class="modal fade" id="gameDetailsModal" tabindex="-1" aria-labelledby="gameDetailsModalLabel"
-        aria-hidden="true">
+    <div class="modal fade" id="gameDetailsModal" tabindex="-1" aria-labelledby="gameDetailsModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="gameDetailsModalLabel">Game Details</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body text-center">
+                    <img id="modalGameImage" src="" alt="Game Image" class="img-fluid mb-3" style="max-height: 200px; object-fit: cover;">
                     <h5 id="modalGameName"></h5>
                     <p id="modalGameDescription"></p>
                     <p id="modalAdditionalDescription" class="text-muted"></p>
@@ -103,10 +103,11 @@ if (!isset($_SESSION['cart'])) {
     </div>
 
     <script>
-        function showDetails(name, description, additionalDescription) {
+        function showDetails(name, description, additionalDescription, imagePath) {
             document.getElementById('modalGameName').innerText = name;
             document.getElementById('modalGameDescription').innerText = description;
             document.getElementById('modalAdditionalDescription').innerText = additionalDescription;
+            document.getElementById('modalGameImage').src = imagePath; // Set the image source
             const modal = new bootstrap.Modal(document.getElementById('gameDetailsModal'));
             modal.show();
         }
