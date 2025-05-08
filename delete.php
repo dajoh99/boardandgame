@@ -17,13 +17,13 @@ if ($conn->connect_error) {
 
 $user = $_SESSION['username'];
 
-// Delete the user account
+
 $sql = "DELETE FROM users WHERE username = ?";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("s", $user);
 
 if ($stmt->execute()) {
-    // Log out the user
+    
     session_destroy();
     header("Location: index.php");
     exit();

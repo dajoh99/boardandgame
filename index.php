@@ -164,14 +164,14 @@ if (!isset($_SESSION['cart'])) {
 </html>
 <script>
     document.addEventListener('DOMContentLoaded', () => {
-        // Fetch cart data on page load
+        
         fetch('cart.php', {
             method: 'POST',
-            body: new URLSearchParams({ action: 'fetch' }) // Custom action to fetch cart
+            body: new URLSearchParams({ action: 'fetch' }) 
         })
             .then(response => response.json())
             .then(data => {
-                renderCart(data); // Render the cart with the fetched data
+                renderCart(data); 
             });
     });
 
@@ -232,7 +232,7 @@ if (!isset($_SESSION['cart'])) {
             .then(data => {
                 if (data.status === 'success') {
                     alert(data.message);
-                    renderCart({}); // Clear the cart UI
+                    renderCart({}); 
                 } else {
                     alert(data.message);
                 }

@@ -27,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } elseif ($action === 'clear') {
         $_SESSION['cart'] = [];
     } elseif ($action === 'fetch') {
-        // Return the current cart data
+        
         echo json_encode($_SESSION['cart']);
         exit;
     }

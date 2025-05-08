@@ -17,7 +17,7 @@ if ($conn->connect_error) {
 
 $user = $_SESSION['username'];
 
-// Handle form submission
+
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['update_profile'])) {
     $updated_email = trim($_POST['email']);
     $updated_address = trim($_POST['street_address']);
@@ -38,7 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['update_profile'])) {
     $stmt->close();
 }
 
-// Fetch current user data
+
 $sql = "SELECT email, street_address, city, state FROM users WHERE username = ?";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("s", $user);

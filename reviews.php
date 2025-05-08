@@ -10,7 +10,6 @@ $db_username = "root";
 $db_password = "root";
 $dbname = "user_registration";
 
-// Fetch game list (from product_catalog.products and products2)
 $games = [];
 
 $conn = new mysqli($servername, $db_username, $db_password, "product_catalog");
@@ -25,7 +24,7 @@ while ($row = $result2->fetch_assoc()) {
 }
 $conn->close();
 
-// Fetch user info
+
 $conn = new mysqli($servername, $db_username, $db_password, $dbname);
 $user = $_SESSION['username'];
 $user_sql = "SELECT city, state FROM users WHERE username = ?";
@@ -36,7 +35,7 @@ $stmt->bind_result($city, $state);
 $stmt->fetch();
 $stmt->close();
 
-// Handle review submission
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $game = $_POST['game'];
     $comment = $_POST['comment'];
