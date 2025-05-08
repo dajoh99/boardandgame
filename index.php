@@ -163,6 +163,18 @@ if (!isset($_SESSION['cart'])) {
 
 </html>
 <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // Fetch cart data on page load
+        fetch('cart.php', {
+            method: 'POST',
+            body: new URLSearchParams({ action: 'fetch' }) // Custom action to fetch cart
+        })
+            .then(response => response.json())
+            .then(data => {
+                renderCart(data); // Render the cart with the fetched data
+            });
+    });
+
     function updateCart(action, name, image, description) {
         const formData = new FormData();
         formData.append('action', action);
