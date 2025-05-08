@@ -30,21 +30,21 @@ session_start();
     integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq"
     crossorigin="anonymous"></script>
 
-  <img src="images/monopoly-man-logo.png" alt="Monopoly Man Image">
-  <div class="login-form">
-    <h2>SIGN IN</h2>
-    <p>Enter your details below</p>
-    <form action="login.php" method="POST">
-      <label>Username</label>
-      <input type="email" name="email" required>
+  <div class="signup-wrapper"> <img src="images/monopoly-man-logo.png" alt="Monopoly Man Image">
+    <div class="login-form">
+      <h2>SIGN IN</h2>
+      <p>Enter your details below</p>
+      <form action="login.php" method="POST">
+        <label>Username</label>
+        <input type="email" name="email" required>
 
-      <label>Password</label>
-      <input type="password" name="password" required>
+        <label>Password</label>
+        <input type="password" name="password" required>
 
-      <button type="submit">Login</button>
-    </form>
+        <button type="submit">Login</button>
+      </form>
+    </div>
   </div>
-
 </body>
 
 </html>

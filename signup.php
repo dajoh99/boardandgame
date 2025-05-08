@@ -32,7 +32,7 @@ session_start();
     integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq"
     crossorigin="anonymous"></script>
 </body>
-<img src="images/monopoly-man-logo.png" alt="Monopoly Man Image">
+<div class="signup-wrapper"><img src="images/monopoly-man-logo.png" alt="Monopoly Man Image">
 <div class="container">
   <div class="signup-form">
     <h2>Sign Up</h2>
@@ -54,7 +54,7 @@ session_start();
     </form>
   </div>
 </div>
-
+</div>
 </html>
 <?php
 $servername = "localhost";
