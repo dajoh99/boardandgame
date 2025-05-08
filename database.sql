@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: May 05, 2025 at 01:08 AM
+-- Generation Time: May 08, 2025 at 07:21 AM
 -- Server version: 5.7.24
 -- PHP Version: 8.3.1
 
@@ -26,6 +26,54 @@ USE `product_catalog`;
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `all_games`
+--
+
+CREATE TABLE `all_games` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `description` text NOT NULL,
+  `image_path` varchar(255) NOT NULL,
+  `additional_description` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `all_games`
+--
+
+INSERT INTO `all_games` (`id`, `name`, `description`, `image_path`, `additional_description`) VALUES
+(1, 'Monopoly', 'Perry Hall, MD', 'images/monopolyboard.png', 'MONOPOLY IS REAL'),
+(2, 'Sorry', 'Nottingham, MD', 'images/sorrygame.png', 'This is an additional description for the game.'),
+(3, 'Chess Board', 'Perry Hall, MD', 'images/chessboard.png', 'This is an additional description for the game.'),
+(4, 'CLUE', 'Parkville, MD', 'images/clueboard.png', 'This is an additional description for the game.'),
+(5, 'Monopoly', 'Parkville, MD', 'images/monopolyboard.png', 'This is an additional description for the game.'),
+(8, 'Monopoly D&D', 'Washington, D.C.', 'images/dndboard.png', 'This is an additional description for the game.'),
+(9, 'Dungeons And Dragons', 'Nottingham, MD', 'images/dndboard2.png', 'This is an additional description for the game.'),
+(10, 'The Game of Life', 'Baltimore, MD', 'images/lifegame.png', 'This is an additional description for the game.'),
+(11, 'Backgammon', 'Silver Spring, MD', 'images/backgammon.png', 'This is an additional description for the game.');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `orders`
+--
+
+CREATE TABLE `orders` (
+  `id` int(11) NOT NULL,
+  `order_data` json NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `orders`
+--
+
+INSERT INTO `orders` (`id`, `order_data`, `created_at`) VALUES
+(1, '{\"CLUE\": {\"image\": \"images/clueboard.png\", \"description\": \"Parkville, MD\"}, \"Monopoly\": {\"image\": \"images/monopolyboard.png\", \"description\": \"Parkville,MD\"}, \"Chess Board\": {\"image\": \"images/chessboard.png\", \"description\": \"Perry Hall, MD\"}}', '2025-05-08 03:43:08');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `products`
 --
 
@@ -41,11 +89,11 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `name`, `description`, `image_path`) VALUES
-(1, 'Monopoly', 'Perry Hall,MD', 'images/monopolyboard.png'),
-(2, 'Sorry', 'Nottingham,MD', 'images/sorrygame.png'),
+(1, 'Monopoly', 'Perry Hall, MD', 'images/monopolyboard.png'),
+(2, 'Sorry', 'Nottingham, MD', 'images/sorrygame.png'),
 (3, 'Chess Board', 'Perry Hall, MD', 'images/chessboard.png'),
 (4, 'CLUE', 'Parkville, MD', 'images/clueboard.png'),
-(5, 'Monopoly', 'Parkville,MD', 'images/monopolyboard.png');
+(5, 'Monopoly', 'Parkville, MD', 'images/monopolyboard.png');
 
 -- --------------------------------------------------------
 
@@ -75,6 +123,18 @@ INSERT INTO `products2` (`id`, `name`, `description`, `image_path`) VALUES
 --
 
 --
+-- Indexes for table `all_games`
+--
+ALTER TABLE `all_games`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `orders`
+--
+ALTER TABLE `orders`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `products`
 --
 ALTER TABLE `products`
@@ -89,6 +149,18 @@ ALTER TABLE `products2`
 --
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `all_games`
+--
+ALTER TABLE `all_games`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+
+--
+-- AUTO_INCREMENT for table `orders`
+--
+ALTER TABLE `orders`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `products`
@@ -199,7 +271,7 @@ ALTER TABLE `reviews`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
