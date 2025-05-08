@@ -30,7 +30,8 @@ session_start();
     integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq"
     crossorigin="anonymous"></script>
 
-  <div class="signup-wrapper"> <img src="images/monopoly-man-logo.png" alt="Monopoly Man Image">
+  <div class="signup-wrapper">
+    <div class="signup-image-container"><img src="images/monopoly-man-logo.png" alt="Monopoly Man Image"></div>
     <div class="login-form">
       <h2>SIGN IN</h2>
       <p>Enter your details below</p>

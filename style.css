@@ -340,23 +340,41 @@ a:active {
 }
 .signup-wrapper {
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: flex-start;
   gap: 40px;
-  margin-top: 80px;
-  flex-wrap: wrap; /* stacks vertically on smaller screens */
+  padding: 60px 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  flex-wrap: nowrap; /* force side-by-side layout */
+}
+
+.signup-image-container {
+  flex: 0 0 auto;
 }
 
 .signup-image {
-  max-width: 400px;
+  max-width: 350px;
   width: 100%;
   height: auto;
+  object-fit: contain;
 }
 
 .signup-form {
-  width: 350px;
+  flex: 0 0 400px;
   padding: 30px;
   border: 1px solid #eee;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.05);
-  background-color: #fff;
+  box-shadow: 0px 0px 10px rgba(0,0,0,0.05);
+  background-color: white;
+}
+@media (max-width: 768px) {
+  .signup-wrapper {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .signup-image {
+    max-width: 300px;
+    margin-bottom: 30px;
+  }
 }

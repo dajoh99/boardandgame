@@ -32,29 +32,31 @@ session_start();
     integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq"
     crossorigin="anonymous"></script>
 </body>
-<div class="signup-wrapper"><img src="images/monopoly-man-logo.png" alt="Monopoly Man Image">
-<div class="container">
-  <div class="signup-form">
-    <h2>Sign Up</h2>
-    <form action="signup.php" method="POST">
-      <label>Username:</label>
-      <input type="text" name="username" required><br>
-      <label>Email:</label>
-      <input type="email" name="email" required><br>
-      <label>Password:</label>
-      <input type="password" name="password" required><br>
-      <label>Street Address:</label>
-      <input type="text" name="street_address" required><br>
-      <label>City:</label>
-      <input type="text" name="city" required><br>
-      <label>State:</label>
-      <input type="text" name="state" required><br>
-      <button type="submit">Sign Up</button>
+<div class="signup-wrapper">
+  <div class="signup-image-container"><img src="images/monopoly-man-logo.png" alt="Monopoly Man Image"></div>
+  <div class="container">
+    <div class="signup-form">
+      <h2>Sign Up</h2>
+      <form action="signup.php" method="POST">
+        <label>Username:</label>
+        <input type="text" name="username" required><br>
+        <label>Email:</label>
+        <input type="email" name="email" required><br>
+        <label>Password:</label>
+        <input type="password" name="password" required><br>
+        <label>Street Address:</label>
+        <input type="text" name="street_address" required><br>
+        <label>City:</label>
+        <input type="text" name="city" required><br>
+        <label>State:</label>
+        <input type="text" name="state" required><br>
+        <button type="submit">Sign Up</button>
 
-    </form>
+      </form>
+    </div>
   </div>
 </div>
-</div>
+
 </html>
 <?php
 $servername = "localhost";
