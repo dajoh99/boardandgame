@@ -12,15 +12,11 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Fetch games from both tables
+// Fetch games from the new `all_games` table
 $games = [];
-$result1 = $conn->query("SELECT name, description, image_path FROM products");
-$result2 = $conn->query("SELECT name, description, image_path FROM products2");
+$result = $conn->query("SELECT name, description, image_path, additional_description FROM all_games");
 
-while ($row = $result1->fetch_assoc()) {
-    $games[] = $row;
-}
-while ($row = $result2->fetch_assoc()) {
+while ($row = $result->fetch_assoc()) {
     $games[] = $row;
 }
 
@@ -74,7 +70,8 @@ if (!isset($_SESSION['cart'])) {
                         <div class="card-body">
                             <h5 class="card-title"><?php echo htmlspecialchars($game['name']); ?></h5>
                             <p class="card-text"><?php echo htmlspecialchars($game['description']); ?></p>
-                            <button class="btn btn-primary" onclick="showDetails('<?php echo htmlspecialchars($game['name']); ?>', '<?php echo htmlspecialchars($game['description']); ?>', 'This is an additional description for <?php echo htmlspecialchars($game['name']); ?>.')">
+                            <button class="btn btn-primary"
+                                onclick="showDetails('<?php echo htmlspecialchars($game['name']); ?>', '<?php echo htmlspecialchars($game['description']); ?>', '<?php echo htmlspecialchars($game['additional_description']); ?>')">
                                 View Details
                             </button>
                         </div>
@@ -85,7 +82,8 @@ if (!isset($_SESSION['cart'])) {
     </div>
 
     <!-- Modal for Game Details -->
-    <div class="modal fade" id="gameDetailsModal" tabindex="-1" aria-labelledby="gameDetailsModalLabel" aria-hidden="true">
+    <div class="modal fade" id="gameDetailsModal" tabindex="-1" aria-labelledby="gameDetailsModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
