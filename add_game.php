@@ -95,8 +95,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <input type="text" class="form-control" id="name" name="name" required>
             </div>
             <div class="mb-3">
-                <label for="description" class="form-label">Description</label>
-                <textarea class="form-control" id="description" name="description" rows="3" required></textarea>
+                <label for="description" class="form-label">Location</label>
+                <textarea class="form-control" id="description" name="description" rows="1" required></textarea>
             </div>
             <div class="mb-3">
                 <label for="category" class="form-label">Category</label>
