@@ -97,7 +97,6 @@ if (!isset($_SESSION['cart'])) {
                     <div class="card-body">
                         <h5 class="card-title"><?php echo htmlspecialchars($game['name']); ?></h5>
                         <p class="card-text"><?php echo htmlspecialchars($game['description']); ?></p>
-                        <p class="card-category text-muted"><?php echo htmlspecialchars($game['category']); ?></p>
                         <button class="btn btn-primary"
                             onclick="showDetails('<?php echo htmlspecialchars($game['name']); ?>', '<?php echo htmlspecialchars($game['description']); ?>', '<?php echo htmlspecialchars($game['additional_description']); ?>', '<?php echo htmlspecialchars($game['image_path']); ?>')">
                             View Details
