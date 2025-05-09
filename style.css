@@ -47,7 +47,16 @@ body::before {
   background: none;
   border: none;
   font-size: 14px;
-  margin-left: 50px;
+  margin-left: 20px;
+  padding: 10px 15px;
+  transition: transform 0.2s, background-color 0.2s; /* Smooth transition for hover effects */
+  cursor: pointer;
+}
+
+.nav-buttons button:hover {
+  transform: translateX(5px); /* Indent the button slightly */
+  background-color: #f0f0f0; /* Optional: Add a light background color */
+  border-radius: 5px; /* Optional: Add rounded corners */
 }
 
 img {
