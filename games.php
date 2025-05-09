@@ -89,6 +89,12 @@ if (!isset($_SESSION['cart'])) {
             <button type="submit" class="btn btn-primary">Filter</button>
         </form>
 
+        <div class="text-center mb-4">
+            <?php if (isset($_SESSION['username'])): ?>
+                <a href="add_game.php" class="btn btn-success">Add a New Game</a>
+            <?php endif; ?>
+        </div>
+
         <div class="games-grid">
             <?php foreach ($games as $game): ?>
                 <div class="card">
