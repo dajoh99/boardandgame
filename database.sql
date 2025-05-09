@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: May 08, 2025 at 07:21 AM
+-- Generation Time: May 09, 2025 at 01:35 AM
 -- Server version: 5.7.24
 -- PHP Version: 8.3.1
 
@@ -34,23 +34,24 @@ CREATE TABLE `all_games` (
   `name` varchar(255) NOT NULL,
   `description` text NOT NULL,
   `image_path` varchar(255) NOT NULL,
-  `additional_description` text NOT NULL
+  `additional_description` text NOT NULL,
+  `category` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `all_games`
 --
 
-INSERT INTO `all_games` (`id`, `name`, `description`, `image_path`, `additional_description`) VALUES
-(1, 'Monopoly', 'Perry Hall, MD', 'images/monopolyboard.png', 'MONOPOLY IS REAL'),
-(2, 'Sorry', 'Nottingham, MD', 'images/sorrygame.png', 'This is an additional description for the game.'),
-(3, 'Chess Board', 'Perry Hall, MD', 'images/chessboard.png', 'This is an additional description for the game.'),
-(4, 'CLUE', 'Parkville, MD', 'images/clueboard.png', 'This is an additional description for the game.'),
-(5, 'Monopoly', 'Parkville, MD', 'images/monopolyboard.png', 'This is an additional description for the game.'),
-(8, 'Monopoly D&D', 'Washington, D.C.', 'images/dndboard.png', 'This is an additional description for the game.'),
-(9, 'Dungeons And Dragons', 'Nottingham, MD', 'images/dndboard2.png', 'This is an additional description for the game.'),
-(10, 'The Game of Life', 'Baltimore, MD', 'images/lifegame.png', 'This is an additional description for the game.'),
-(11, 'Backgammon', 'Silver Spring, MD', 'images/backgammon.png', 'This is an additional description for the game.');
+INSERT INTO `all_games` (`id`, `name`, `description`, `image_path`, `additional_description`, `category`) VALUES
+(1, 'Monopoly', 'Perry Hall, MD', 'images/monopolyboard.png', 'MONOPOLY IS REAL', 'Family'),
+(2, 'Sorry', 'Nottingham, MD', 'images/sorrygame.png', 'This is an additional description for the game.', 'Family'),
+(3, 'Chess Board', 'Perry Hall, MD', 'images/chessboard.png', 'This is an additional description for the game.', 'Strategy'),
+(4, 'CLUE', 'Parkville, MD', 'images/clueboard.png', 'This is an additional description for the game.', 'Mystery'),
+(5, 'Monopoly', 'Parkville, MD', 'images/monopolyboard.png', 'This is an additional description for the game.', 'Family'),
+(8, 'Monopoly D&D', 'Washington, D.C.', 'images/dndboard.png', 'This is an additional description for the game.', 'Role Playing'),
+(9, 'Dungeons And Dragons', 'Nottingham, MD', 'images/dndboard2.png', 'This is an additional description for the game.', 'Role Playing'),
+(10, 'The Game of Life', 'Baltimore, MD', 'images/lifegame.png', 'This is an additional description for the game.', 'Family'),
+(11, 'Backgammon', 'Silver Spring, MD', 'images/backgammon.png', 'This is an additional description for the game.', 'Strategy');
 
 -- --------------------------------------------------------
 

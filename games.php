@@ -12,10 +12,25 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Fetch games from the new `all_games` table
-$games = [];
-$result = $conn->query("SELECT name, description, image_path, additional_description FROM all_games");
+// Fetch categories for the dropdown
+$categories = [];
+$categoryResult = $conn->query("SELECT DISTINCT category FROM all_games");
+while ($row = $categoryResult->fetch_assoc()) {
+    $categories[] = $row['category'];
+}
 
+// Fetch games based on selected category
+$selectedCategory = $_GET['category'] ?? 'All';
+if ($selectedCategory === 'All') {
+    $result = $conn->query("SELECT name, description, image_path, additional_description, category FROM all_games");
+} else {
+    $stmt = $conn->prepare("SELECT name, description, image_path, additional_description, category FROM all_games WHERE category = ?");
+    $stmt->bind_param("s", $selectedCategory);
+    $stmt->execute();
+    $result = $stmt->get_result();
+}
+
+$games = [];
 while ($row = $result->fetch_assoc()) {
     $games[] = $row;
 }
@@ -61,20 +76,32 @@ if (!isset($_SESSION['cart'])) {
 
     <div class="container mt-5">
         <h2 class="text-center mb-4">All Games</h2>
-        <div class="row">
+        <form method="GET" class="mb-4 text-center">
+            <label for="category" class="form-label">Sort by Category:</label>
+            <select name="category" id="category" class="form-select w-auto d-inline-block">
+                <option value="All" <?php echo $selectedCategory === 'All' ? 'selected' : ''; ?>>All</option>
+                <?php foreach ($categories as $category): ?>
+                    <option value="<?php echo htmlspecialchars($category); ?>" <?php echo $selectedCategory === $category ? 'selected' : ''; ?>>
+                        <?php echo htmlspecialchars($category); ?>
+                    </option>
+                <?php endforeach; ?>
+            </select>
+            <button type="submit" class="btn btn-primary">Filter</button>
+        </form>
+
+        <div class="games-grid">
             <?php foreach ($games as $game): ?>
-                <div class="col-md-4 mb-4">
-                    <div class="card">
-                        <img src="<?php echo htmlspecialchars($game['image_path']); ?>" class="card-img-top"
-                            alt="<?php echo htmlspecialchars($game['name']); ?>">
-                        <div class="card-body">
-                            <h5 class="card-title"><?php echo htmlspecialchars($game['name']); ?></h5>
-                            <p class="card-text"><?php echo htmlspecialchars($game['description']); ?></p>
-                            <button class="btn btn-primary"
-                                onclick="showDetails('<?php echo htmlspecialchars($game['name']); ?>', '<?php echo htmlspecialchars($game['description']); ?>', '<?php echo htmlspecialchars($game['additional_description']); ?>', '<?php echo htmlspecialchars($game['image_path']); ?>')">
-                                View Details
-                            </button>
-                        </div>
+                <div class="card">
+                    <img src="<?php echo htmlspecialchars($game['image_path']); ?>" class="card-img-top"
+                        alt="<?php echo htmlspecialchars($game['name']); ?>">
+                    <div class="card-body">
+                        <h5 class="card-title"><?php echo htmlspecialchars($game['name']); ?></h5>
+                        <p class="card-text"><?php echo htmlspecialchars($game['description']); ?></p>
+                        <p class="card-category text-muted"><?php echo htmlspecialchars($game['category']); ?></p>
+                        <button class="btn btn-primary"
+                            onclick="showDetails('<?php echo htmlspecialchars($game['name']); ?>', '<?php echo htmlspecialchars($game['description']); ?>', '<?php echo htmlspecialchars($game['additional_description']); ?>', '<?php echo htmlspecialchars($game['image_path']); ?>')">
+                            View Details
+                        </button>
                     </div>
                 </div>
             <?php endforeach; ?>
@@ -82,7 +109,8 @@ if (!isset($_SESSION['cart'])) {
     </div>
 
     <!-- Modal for Game Details -->
-    <div class="modal fade" id="gameDetailsModal" tabindex="-1" aria-labelledby="gameDetailsModalLabel" aria-hidden="true">
+    <div class="modal fade" id="gameDetailsModal" tabindex="-1" aria-labelledby="gameDetailsModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -90,7 +118,8 @@ if (!isset($_SESSION['cart'])) {
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body text-center">
-                    <img id="modalGameImage" src="" alt="Game Image" class="img-fluid mb-3" style="max-height: 200px; object-fit: cover;">
+                    <img id="modalGameImage" src="" alt="Game Image" class="img-fluid mb-3"
+                        style="max-height: 200px; object-fit: cover;">
                     <h5 id="modalGameName"></h5>
                     <p id="modalGameDescription"></p>
                     <p id="modalAdditionalDescription" class="text-muted"></p>

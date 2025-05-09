@@ -412,3 +412,132 @@ a:active {
 .modal-body p {
     font-size: 1rem;
 }
+
+/* Games grid layout */
+.games-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); /* 6 cards per row if space allows */
+    gap: 20px; /* Space between cards */
+    padding: 10px;
+}
+
+.games-grid .card {
+    width: 100%; /* Ensure cards fit within the grid */
+    padding: 10px;
+    font-size: 14px; /* Smaller font size */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+}
+
+.games-grid .card img {
+    height: 100px; /* Set a fixed height for images */
+    object-fit: cover; /* Ensure the image fits within the card */
+    border-radius: 5px;
+}
+
+.games-grid .card-body {
+    padding: 5px; /* Reduce padding inside the card */
+    text-align: center; /* Center-align text */
+}
+
+.games-grid .card-title {
+    font-size: 16px; /* Smaller title font size */
+    margin-bottom: 5px;
+}
+
+.games-grid .card-text {
+    font-size: 12px; /* Smaller description font size */
+    color: #555;
+}
+
+.games-grid .btn {
+    font-size: 12px; /* Smaller button font size */
+    padding: 5px 10px; /* Reduce button padding */
+}
+
+.games-grid .btn {
+    background-color: white; /* White background */
+    color: #8B4513; /* Brown text color */
+    border: 2px solid #8B4513; /* Brown border */
+    font-size: 12px; /* Smaller font size */
+    padding: 5px 10px; /* Adjust padding */
+    transition: background-color 0.3s, color 0.3s; /* Smooth transition */
+}
+
+.games-grid .btn:hover {
+    background-color: #8B4513; /* Brown background on hover */
+    color: white; /* White text on hover */
+}
+
+.games-grid .btn:focus,
+.games-grid .btn:focus-visible {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+.games-grid .btn:active {
+    background-color: #4a1f0d !important; /* Deeper brown background */
+    border-color: #4a1f0d !important; /* Match border color */
+    color: white !important; /* Keep white text */
+}
+
+@media (max-width: 768px) {
+    .games-grid {
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); /* Smaller cards on smaller screens */
+    }
+
+    .games-grid .card img {
+        height: 80px; /* Adjust image height */
+    }
+
+    .games-grid .card-title {
+        font-size: 14px; /* Smaller title font size */
+    }
+
+    .games-grid .card-text {
+        font-size: 10px; /* Smaller description font size */
+    }
+}
+
+form {
+    margin-bottom: 20px;
+}
+
+form .form-select {
+    display: inline-block;
+    width: auto;
+    margin-right: 10px;
+}
+
+form .btn-primary {
+    background-color: #8B4513; /* Brown background */
+    color: white; /* White text */
+    border: 2px solid #8B4513; /* Brown border */
+    transition: background-color 0.3s, color 0.3s; /* Smooth transition */
+}
+
+form .btn-primary:hover {
+    background-color: #5a2e0e; /* Darker brown on hover */
+    border-color: #5a2e0e; /* Match border color on hover */
+}
+
+form .btn-primary:focus,
+form .btn-primary:active {
+    outline: none !important; /* Remove the default blue outline */
+    box-shadow: none !important; /* Remove any focus shadow */
+    background-color: #8B4513 !important; /* Keep the brown background */
+    color: white !important; /* Keep the white text */
+    border-color: #8B4513 !important; /* Keep the brown border */
+}
+
+form .btn-primary:active {
+    background-color: #4a1f0d !important; /* Deeper brown background */
+    border-color: #4a1f0d !important; /* Match border color */
+    color: white !important; /* Keep white text */
+}
+
+.card-category {
+    font-size: 12px;
+    color: #888;
+    margin-bottom: 10px;
+}
