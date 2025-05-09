@@ -65,6 +65,12 @@ $result = $conn->query("SELECT * FROM reviews ORDER BY created_at DESC");
                         <?php echo nl2br(htmlspecialchars($row['comment'])); ?>
                     </div>
                 </div>
+                <?php if ($_SESSION['username'] === $row['username']): ?>
+                    <form method="POST" action="delete_review.php" style="margin-top: 10px;">
+                        <input type="hidden" name="review_id" value="<?php echo $row['id']; ?>">
+                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                    </form>
+                <?php endif; ?>
             </div>
         <?php endwhile; ?>
     </div>
