@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: May 09, 2025 at 03:33 AM
+-- Generation Time: May 09, 2025 at 05:22 AM
 -- Server version: 5.7.24
 -- PHP Version: 8.3.1
 
@@ -44,16 +44,16 @@ CREATE TABLE `all_games` (
 --
 
 INSERT INTO `all_games` (`id`, `name`, `description`, `image_path`, `additional_description`, `category`, `added_by`) VALUES
-(1, 'Monopoly', 'Perry Hall, MD', 'images/monopolyboard.png', 'MONOPOLY IS REAL', 'Family', NULL),
-(2, 'Sorry', 'Nottingham, MD', 'images/sorrygame.png', 'This is an additional description for the game.', 'Family', NULL),
-(3, 'Chess Board', 'Perry Hall, MD', 'images/chessboard.png', 'This is an additional description for the game.', 'Strategy', NULL),
-(4, 'CLUE', 'Parkville, MD', 'images/clueboard.png', 'This is an additional description for the game.', 'Mystery', NULL),
-(5, 'Monopoly', 'Parkville, MD', 'images/monopolyboard.png', 'This is an additional description for the game.', 'Family', NULL),
-(8, 'Monopoly D&D', 'Washington, D.C.', 'images/dndboard.png', 'This is an additional description for the game.', 'Role Playing', NULL),
-(9, 'Dungeons And Dragons', 'Nottingham, MD', 'images/dndboard2.png', 'This is an additional description for the game.', 'Role Playing', NULL),
-(10, 'The Game of Life', 'Baltimore, MD', 'images/lifegame.png', 'This is an additional description for the game.', 'Family', NULL),
-(11, 'Backgammon', 'Silver Spring, MD', 'images/backgammon.png', 'This is an additional description for the game.', 'Strategy', NULL),
-(15, 'Candy Land', 'Testing', 'images/candyland.png', 'This is an additional description for the game.', 'Family', 'projecttester');
+(1, 'Monopoly', 'Perry Hall, MD', 'images/monopolyboard.png', 'Buy, sell, dream, and scheme the way to riches with the Monopoly board game! Select a favorite Monopoly token, place it on Go, and roll the dice to own it all! Featuring classic Monopoly gameplay, this favorite family board game is all about buying, selling, and trading properties to win. Chance or Community cards can be a game changer. They can make a player richer--or send someone to Jail! Looking for games for Family Game Night? The Monopoly game is a Family Game Night staple. It’s a fun indoor activity for kids ages 8 and up and a great family gift.', 'Family', NULL),
+(2, 'Sorry', 'Nottingham, MD', 'images/sorrygame.png', 'Slide, collide and score to win the Sorry! game! Who knows what will happen next as players chase their opponents around the board, trying to get their 3 pawns from start to home first? Will a player draw a card that tells them to move ahead 2 spaces or back 6? ', 'Family', NULL),
+(3, 'Chess Board', 'Perry Hall, MD', 'images/chessboard.png', 'Game Desc Placeholder', 'Strategy', NULL),
+(4, 'CLUE', 'Parkville, MD', 'images/clueboard.png', 'Game Desc Placeholder', 'Mystery', NULL),
+(5, 'Monopoly', 'Parkville, MD', 'images/monopolyboard.png', 'Game Desc Placeholder', 'Family', NULL),
+(8, 'Monopoly D&D', 'Washington, D.C.', 'images/dndboard.png', 'Game Desc Placeholder', 'Role Playing', NULL),
+(9, 'Dungeons And Dragons', 'Nottingham, MD', 'images/dndboard2.png', 'Game Desc Placeholder', 'Role Playing', NULL),
+(10, 'The Game of Life', 'Baltimore, MD', 'images/lifegame.png', 'Game Desc Placeholder', 'Family', NULL),
+(11, 'Backgammon', 'Silver Spring, MD', 'images/backgammon.png', 'Game Desc Placeholder', 'Strategy', NULL),
+(15, 'Candy Land', 'Middle River, MD', 'images/candyland.png', 'Game Desc Placeholder', 'Family', 'projecttester');
 
 -- --------------------------------------------------------
 
@@ -72,7 +72,8 @@ CREATE TABLE `orders` (
 --
 
 INSERT INTO `orders` (`id`, `order_data`, `created_at`) VALUES
-(1, '{\"CLUE\": {\"image\": \"images/clueboard.png\", \"description\": \"Parkville, MD\"}, \"Monopoly\": {\"image\": \"images/monopolyboard.png\", \"description\": \"Parkville,MD\"}, \"Chess Board\": {\"image\": \"images/chessboard.png\", \"description\": \"Perry Hall, MD\"}}', '2025-05-08 03:43:08');
+(1, '{\"CLUE\": {\"image\": \"images/clueboard.png\", \"description\": \"Parkville, MD\"}, \"Monopoly\": {\"image\": \"images/monopolyboard.png\", \"description\": \"Parkville,MD\"}, \"Chess Board\": {\"image\": \"images/chessboard.png\", \"description\": \"Perry Hall, MD\"}}', '2025-05-08 03:43:08'),
+(2, '{\"CLUE\": {\"image\": \"images/clueboard.png\", \"description\": \"Parkville, MD\"}, \"Sorry\": {\"image\": \"images/sorrygame.png\", \"description\": \"Nottingham, MD\"}}', '2025-05-09 05:20:28');
 
 -- --------------------------------------------------------
 
@@ -163,7 +164,7 @@ ALTER TABLE `all_games`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `products`
@@ -205,7 +206,8 @@ CREATE TABLE `reviews` (
 INSERT INTO `reviews` (`id`, `username`, `city`, `state`, `game_name`, `comment`, `created_at`) VALUES
 (1, 'projecttester', 'East Orange', 'New Jersey', 'Dungeons And Dragons', 'Love this game! My entire friend group enjoyed playing this, I\'d almost say its a must buy!', '2025-05-04 21:55:39'),
 (2, 'sofaygo', 'Houston', 'Texas', 'CLUE', 'And I just wanna know, oh (oh)\r\nAnd I just wanna know how it goes (wanna know how it goes)', '2025-05-04 22:08:58'),
-(3, 'projecttester', 'East Orange', 'New Jersey', 'Sorry', 'Would not recommend; didn\'t have all the pieces, 1/10', '2025-05-05 01:00:16');
+(3, 'projecttester', 'East Orange', 'New Jersey', 'Sorry', 'Would not recommend; didn\'t have all the pieces, 1/10', '2025-05-05 01:00:16'),
+(7, 'projecttester', 'East Orange', 'New Jersey', 'Dungeons And Dragons', 'This game fye', '2025-05-09 04:44:01');
 
 -- --------------------------------------------------------
 
@@ -268,7 +270,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `reviews`
 --
 ALTER TABLE `reviews`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `users`

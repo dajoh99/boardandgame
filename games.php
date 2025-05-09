@@ -113,9 +113,19 @@ if (!isset($_SESSION['cart'])) {
         </div>
     </div>
 
-    <!-- Modal for Game Details -->
-    <div class="modal fade" id="gameDetailsModal" tabindex="-1" aria-labelledby="gameDetailsModalLabel"
-        aria-hidden="true">
+    <div id="cart" class="cart-sidebar">
+        <h4>Your Cart</h4>
+        <ul id="cart-items"></ul>
+        <hr>
+        <button onclick="checkout()" class="btn btn-sm btn-outline-success w-100 mb-2">
+            Checkout
+        </button>
+        <button onclick="clearCart()" class="btn btn-sm btn-outline-danger w-100">
+            Clear Cart
+        </button>
+    </div>
+
+    <div class="modal fade" id="gameDetailsModal" tabindex="-1" aria-labelledby="gameDetailsModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -131,6 +141,7 @@ if (!isset($_SESSION['cart'])) {
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="addToCartButton">Add to Cart</button>
                 </div>
             </div>
         </div>
@@ -141,10 +152,93 @@ if (!isset($_SESSION['cart'])) {
             document.getElementById('modalGameName').innerText = name;
             document.getElementById('modalGameDescription').innerText = description;
             document.getElementById('modalAdditionalDescription').innerText = additionalDescription;
-            document.getElementById('modalGameImage').src = imagePath; // Set the image source
+            document.getElementById('modalGameImage').src = imagePath;
+
+            // Set the "Add to Cart" button behavior
+            const addToCartButton = document.getElementById('addToCartButton');
+            addToCartButton.onclick = () => {
+                updateCart('add', name, imagePath, description);
+            };
+
             const modal = new bootstrap.Modal(document.getElementById('gameDetailsModal'));
             modal.show();
         }
+
+        function updateCart(action, name, image, description) {
+            const formData = new FormData();
+            formData.append('action', action);
+            formData.append('name', name);
+            formData.append('image', image);
+            formData.append('description', description);
+
+            fetch('cart.php', {
+                method: 'POST',
+                body: formData
+            })
+                .then(response => response.json())
+                .then(data => {
+                    renderCart(data);
+                });
+        }
+
+        function renderCart(cart) {
+            const cartList = document.getElementById('cart-items');
+            cartList.innerHTML = '';
+            for (const name in cart) {
+                const item = cart[name];
+                const li = document.createElement('li');
+                li.innerHTML = `
+                    <div style="display: flex; align-items: center; gap: 10px;">
+                        <img src="${item.image}" style="width: 60px; height: 60px; object-fit: cover; border-radius: 8px; flex-shrink: 0;">
+                        <div>
+                            <strong>${name}</strong><br>
+                            <small>${item.description}</small>
+                        </div>
+                    </div>
+                `;
+                cartList.appendChild(li);
+            }
+        }
+
+        function clearCart() {
+            const formData = new FormData();
+            formData.append('action', 'clear');
+
+            fetch('cart.php', {
+                method: 'POST',
+                body: formData
+            })
+                .then(response => response.json())
+                .then(data => {
+                    renderCart(data);
+                });
+        }
+
+        function checkout() {
+            fetch('checkout.php', {
+                method: 'POST'
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'success') {
+                        alert(data.message);
+                        renderCart({});
+                    } else {
+                        alert(data.message);
+                    }
+                });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            fetch('cart.php', {
+                method: 'POST',
+                body: new URLSearchParams({ action: 'fetch' })
+            })
+                .then(response => response.json())
+                .then(data => {
+                    renderCart(data);
+                });
+        });
     </script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"></script>

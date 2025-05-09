@@ -68,15 +68,7 @@ if (!isset($_SESSION['cart'])) {
                 $hasResults = true;
                 ?>
 
-                <div class="product">
-                    <div class="hover-controls">
-                        <button class="add-btn" onclick="updateCart('add',
-      '<?php echo htmlspecialchars($name); ?>',
-      '<?php echo htmlspecialchars($image_path); ?>',
-      `<?php echo htmlspecialchars($description); ?>`)">+</button>
-                        <button class="remove-btn"
-                            onclick="updateCart('remove', '<?php echo htmlspecialchars($name); ?>', '<?php echo htmlspecialchars($image_path); ?>')">−</button>
-                    </div>
+                <div class="product" onclick="updateCart('add', '<?php echo htmlspecialchars($name); ?>', '<?php echo htmlspecialchars($image_path); ?>', `<?php echo htmlspecialchars($description); ?>`)">
                     <img src="<?php echo htmlspecialchars($image_path); ?>" alt="<?php echo htmlspecialchars($name); ?>">
                     <div class="product-info">
                         <h2><?php echo htmlspecialchars($name); ?></h2>
@@ -124,15 +116,7 @@ if (!isset($_SESSION['cart'])) {
                 $hasResults = true;
                 ?>
 
-                <div class="product">
-                    <div class="hover-controls">
-                        <button class="add-btn" onclick="updateCart('add',
-      '<?php echo htmlspecialchars($name); ?>',
-      '<?php echo htmlspecialchars($image_path); ?>',
-      `<?php echo htmlspecialchars($description); ?>`)">+</button>
-                        <button class="remove-btn"
-                            onclick="updateCart('remove', '<?php echo htmlspecialchars($name); ?>', '<?php echo htmlspecialchars($image_path); ?>')">−</button>
-                    </div>
+                <div class="product" onclick="updateCart('add', '<?php echo htmlspecialchars($name); ?>', '<?php echo htmlspecialchars($image_path); ?>', `<?php echo htmlspecialchars($description); ?>`)">
                     <img src="<?php echo htmlspecialchars($image_path); ?>" alt="<?php echo htmlspecialchars($name); ?>">
                     <div class="product-info">
                         <h2><?php echo htmlspecialchars($name); ?></h2>

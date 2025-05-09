@@ -187,10 +187,13 @@ img {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   padding: 15px;
   transition: transform 0.2s;
+  cursor: pointer; 
 }
 
 .product:hover {
   transform: translateY(-5px);
+  transform: scale(1.05); 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
 }
 
 .product img {
