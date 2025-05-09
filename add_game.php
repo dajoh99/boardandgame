@@ -21,34 +21,45 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $description = $_POST['description'];
     $category = $_POST['category'];
     $added_by = $_SESSION['username'];
+    $additional_description = "This is an additional description for the game."; // Default value
 
-    // Handle image upload
+    
     $image_path = '';
     if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
         $upload_dir = 'images/';
         $image_path = $upload_dir . basename($_FILES['image']['name']);
-        move_uploaded_file($_FILES['image']['tmp_name'], $image_path);
+        if (!move_uploaded_file($_FILES['image']['tmp_name'], $image_path)) {
+            die("Error: Failed to upload the image.");
+        }
+    } else {
+        die("Error: Image upload failed. Error code: " . $_FILES['image']['error']);
     }
 
-    $stmt = $conn->prepare("INSERT INTO all_games (name, description, image_path, category, added_by) VALUES (?, ?, ?, ?, ?)");
-    $stmt->bind_param("sssss", $game_name, $description, $image_path, $category, $added_by);
-    $stmt->execute();
+    
+    $stmt = $conn->prepare("INSERT INTO all_games (name, description, image_path, additional_description, category, added_by) VALUES (?, ?, ?, ?, ?, ?)");
+    if (!$stmt) {
+        die("Error: " . $conn->error);
+    }
+    $stmt->bind_param("ssssss", $game_name, $description, $image_path, $additional_description, $category, $added_by);
+    if (!$stmt->execute()) {
+        die("Error: " . $stmt->error);
+    }
     $stmt->close();
     $conn->close();
 
-    echo "<script>alert('Game added successfully!'); window.location.href = 'games.php';</script>";
+    
+    header("Location: games.php");
+    exit();
 }
 ?>
 
-<!doctype html>
-<html lang="en">
 <!doctype html>
 <html lang="en">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Home</title>
+    <title>Add Game</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
@@ -75,14 +86,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <?php endif; ?>
         </div>
     </div>
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Add Game</title>
-    <link rel="stylesheet" href="style.css">
-</head>
 
-<body>
     <div class="container mt-5">
         <h2 class="text-center mb-4">Add a New Game</h2>
         <form method="POST" enctype="multipart/form-data">

@@ -8,24 +8,20 @@ if (!isset($_SESSION['username'])) {
 $servername = "localhost";
 $db_username = "root";
 $db_password = "root";
-$dbname = "user_registration";
+$dbname = "product_catalog";
+
 
 $games = [];
+$conn = new mysqli($servername, $db_username, $db_password, $dbname);
+$result = $conn->query("SELECT name FROM all_games");
 
-$conn = new mysqli($servername, $db_username, $db_password, "product_catalog");
-$result1 = $conn->query("SELECT name FROM products");
-$result2 = $conn->query("SELECT name FROM products2");
-
-while ($row = $result1->fetch_assoc()) {
-    $games[] = $row['name'];
-}
-while ($row = $result2->fetch_assoc()) {
+while ($row = $result->fetch_assoc()) {
     $games[] = $row['name'];
 }
 $conn->close();
 
-
-$conn = new mysqli($servername, $db_username, $db_password, $dbname);
+// Fetch user details
+$conn = new mysqli($servername, $db_username, $db_password, "user_registration");
 $user = $_SESSION['username'];
 $user_sql = "SELECT city, state FROM users WHERE username = ?";
 $stmt = $conn->prepare($user_sql);
@@ -35,20 +31,19 @@ $stmt->bind_result($city, $state);
 $stmt->fetch();
 $stmt->close();
 
-
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $game = $_POST['game'];
     $comment = $_POST['comment'];
 
-    $review_conn = new mysqli($servername, $db_username, $db_password, $dbname);
+    $review_conn = new mysqli($servername, $db_username, $db_password, "user_registration");
     $insert = $review_conn->prepare("INSERT INTO reviews (username, city, state, game_name, comment) VALUES (?, ?, ?, ?, ?)");
     $insert->bind_param("sssss", $user, $city, $state, $game, $comment);
     $insert->execute();
     $insert->close();
     $review_conn->close();
 
-    echo "<script>alert('Review submitted');</script>";
-    ;
+    header("Location: reviewsall.php");
+    exit();
 }
 ?>
 <!doctype html>
@@ -71,8 +66,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <div class="nav-buttons">
             <button><a href="games.php">GAMES</a></button>
             <button><a href="reviews.php">REVIEWS</a></button>
-            <button>ABOUT
-            </button>
+            <button>ABOUT</button>
             <button><a href="profile.php">PROFILE</a></button>
         </div>
         <div class="auth-links">
@@ -101,7 +95,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <textarea name="comment" class="form-control" rows="4" required></textarea>
             </div>
             <button type="submit" class="btn btn-primary">Submit Review</button>
-
         </form>
         <a href="reviewsall.php" class="btn btn-success mt-3">View All Reviews</a>
     </div>

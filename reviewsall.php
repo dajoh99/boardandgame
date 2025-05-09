@@ -9,7 +9,29 @@ $servername = "localhost";
 $db_username = "root";
 $db_password = "root";
 $dbname = "user_registration";
-$conn = new mysqli("localhost", "root", "root", "user_registration");
+$conn = new mysqli($servername, $db_username, $db_password, $dbname);
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $review_id = $_POST['review_id'];
+
+    $stmt = $conn->prepare("SELECT username FROM reviews WHERE id = ?");
+    $stmt->bind_param("i", $review_id);
+    $stmt->execute();
+    $stmt->bind_result($review_username);
+    $stmt->fetch();
+    $stmt->close();
+
+    if ($review_username === $_SESSION['username']) {
+        $delete_stmt = $conn->prepare("DELETE FROM reviews WHERE id = ?");
+        $delete_stmt->bind_param("i", $review_id);
+        $delete_stmt->execute();
+        $delete_stmt->close();
+    }
+
+    header("Location: reviewsall.php");
+    exit();
+}
+
 $result = $conn->query("SELECT * FROM reviews ORDER BY created_at DESC");
 ?>
 
@@ -66,7 +88,7 @@ $result = $conn->query("SELECT * FROM reviews ORDER BY created_at DESC");
                     </div>
                 </div>
                 <?php if ($_SESSION['username'] === $row['username']): ?>
-                    <form method="POST" action="delete_review.php" style="margin-top: 10px;">
+                    <form method="POST" action="reviewsall.php" style="margin-top: 10px;">
                         <input type="hidden" name="review_id" value="<?php echo $row['id']; ?>">
                         <button type="submit" class="btn btn-danger btn-sm">Delete</button>
                     </form>

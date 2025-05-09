@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: May 09, 2025 at 02:56 AM
+-- Generation Time: May 09, 2025 at 03:33 AM
 -- Server version: 5.7.24
 -- PHP Version: 8.3.1
 
@@ -52,7 +52,8 @@ INSERT INTO `all_games` (`id`, `name`, `description`, `image_path`, `additional_
 (8, 'Monopoly D&D', 'Washington, D.C.', 'images/dndboard.png', 'This is an additional description for the game.', 'Role Playing', NULL),
 (9, 'Dungeons And Dragons', 'Nottingham, MD', 'images/dndboard2.png', 'This is an additional description for the game.', 'Role Playing', NULL),
 (10, 'The Game of Life', 'Baltimore, MD', 'images/lifegame.png', 'This is an additional description for the game.', 'Family', NULL),
-(11, 'Backgammon', 'Silver Spring, MD', 'images/backgammon.png', 'This is an additional description for the game.', 'Strategy', NULL);
+(11, 'Backgammon', 'Silver Spring, MD', 'images/backgammon.png', 'This is an additional description for the game.', 'Strategy', NULL),
+(15, 'Candy Land', 'Testing', 'images/candyland.png', 'This is an additional description for the game.', 'Family', 'projecttester');
 
 -- --------------------------------------------------------
 
@@ -156,7 +157,7 @@ ALTER TABLE `products2`
 -- AUTO_INCREMENT for table `all_games`
 --
 ALTER TABLE `all_games`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `orders`
@@ -267,7 +268,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `reviews`
 --
 ALTER TABLE `reviews`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `users`

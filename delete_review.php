@@ -18,8 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     }
-
-    // Check if the review belongs to the logged-in user
+    
     $stmt = $conn->prepare("SELECT username FROM reviews WHERE id = ?");
     $stmt->bind_param("i", $review_id);
     $stmt->execute();
@@ -28,7 +27,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt->close();
 
     if ($review_username === $_SESSION['username']) {
-        // Delete the review
         $delete_stmt = $conn->prepare("DELETE FROM reviews WHERE id = ?");
         $delete_stmt->bind_param("i", $review_id);
         $delete_stmt->execute();
